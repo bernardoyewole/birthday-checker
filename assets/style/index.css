@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+:root {
+    --app-dark-bg: #1a1d28;
+    --app-red: #ff3c57;
+    --app-green: #33ab4e;
+    --app-purple: #833cff;
+    --app-orange: #ff833c;
+    --app-blue: #3c57ff;
+    --app-blue-hover: #364ee6;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: var(--app-dark-bg);
+}
+
+main {
+    height: 100%;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+section h1 {
+    color: #fff;
+    font-size: 40px;
+}
+
+.result {
+    background: rgba(0 0 0 / 0.25);
+    margin-top: 30px;
+}
+
+.result p {
+    color: #fff;
+    padding-left: 30px;
+    height: 20px;
+}
+
+form, .result {
+    width: 400px;
+}
+
+button {
+    padding: 10px 30px;
+    font-size: 17px;
+    background-color: #33ab4e;
+    color: #fff;
+    border: 1px solid #469859;
+    border-radius: 5px;
+    width: 30%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #469859;
+}
+
+input {
+    width: 60%;
+    padding: 10px;
+    font-size: 17px;
+    margin-right: 10px;
+}
+
+
