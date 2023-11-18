@@ -19,6 +19,8 @@ const daysToBirthday = select('.days-to-birthday');
 
 const YEAR_IN_MILLISECONDS = 1000 * 60 * 60 * 24 * 365;
 const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
+const DAYS_IN_A_YEAR = 365;
+
 let today = new Date();
 today.setHours(0, 0, 0, 0);
 
@@ -53,6 +55,7 @@ function setUserDate(arr) {
 function setUserAge() {
     let arr = getInput(userInput.value);
     let userDate = new Date(arr[2], arr[1] - 1, arr[0]);
+    // userDate.setHours(0, 0, 0, 0);
     return (today - userDate) / YEAR_IN_MILLISECONDS;
 }
 
@@ -64,16 +67,19 @@ function setUserDays() {
 
 function setDaysToBirthday() {
     let arr = getInput(userInput.value);
-    let nextBirthday = new Date(today.getFullYear(), arr[1] - 1, arr[0]);
-    
-    if (today.getDate() > nextBirthday.getDate()) {
-        let next = 365 - (today.getDate() - nextBirthday.getDate());
-        daysToBirthday.innerText = `${Math.floor(next)} day(s) until your birthday`;
-    } else if (today.getDate() < nextBirthday.getDate()) {
-        let days = (nextBirthday - today) / DAY_IN_MILLISECONDS;
+    let month = arr[1] - 1;
+    let day = arr[0];
+    let nextBirthday = new Date(today.getFullYear(), month, day);
+    let diff = (nextBirthday - today) / DAY_IN_MILLISECONDS;
+    let days;
+
+    if (diff === 0 ) {
+        daysToBirthday.innerText = `Happy Birthday!!`;
+    } else if (diff < 0) {
+        days = DAYS_IN_A_YEAR + (diff);
         daysToBirthday.innerText = `${Math.floor(days)} day(s) until your birthday`;
     } else {
-        daysToBirthday.innerText = `Happy Birthday!!`;
+        daysToBirthday.innerText = `${Math.floor(diff)} day(s) until your birthday`
     }
 }
 
