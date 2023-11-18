@@ -33,7 +33,7 @@ onEvent('load', window, () => {
 });
 
 function isValid(arg) {
-    let dateFormat = /^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$/;
+    let dateFormat = /^(0?[1-9]|[1-2][0-9]|3[0-1])-(0?[1-9]|1[0-2])-\d{4}$/;
     if (arg !== "" && dateFormat.test(arg) === true) {
         return true;
     }
@@ -55,8 +55,14 @@ function setUserDate(arr) {
 function setUserAge() {
     let arr = getInput(userInput.value);
     let userDate = new Date(arr[2], arr[1] - 1, arr[0]);
+    let diff = Date.now() - userDate.getTime();
+    let newDate = new Date(diff);
+    let year = newDate.getUTCFullYear();
+
+    return Math.floor(year - 1970);
+
     // userDate.setHours(0, 0, 0, 0);
-    return (today - userDate) / YEAR_IN_MILLISECONDS;
+    // return (today - userDate) / YEAR_IN_MILLISECONDS;
 }
 
 function setUserDays() {
