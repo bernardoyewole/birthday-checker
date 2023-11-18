@@ -24,18 +24,27 @@ const DAYS_IN_A_YEAR = 365;
 let today = new Date();
 today.setHours(0, 0, 0, 0);
 
-onEvent('load', window, () => {
-    // userInput.value = '';
+function clear() {
+    userInput.value = '';
     userDate.innerText = '';
     userAge.innerText = '';
     userDays.innerText = '';
     daysToBirthday.innerText = '';
+}
+
+onEvent('load', window, () => {
+    clear();
 });
 
 function isValid(arg) {
     let dateFormat = /^(0?[1-9]|[1-2][0-9]|3[0-1])-(0?[1-9]|1[0-2])-\d{4}$/;
+    let arr = getInput(arg);
+    let date = new Date (arr[2], arr[1] - 1, arr[0]);
+
     if (arg !== "" && dateFormat.test(arg) === true) {
-        return true;
+        if ((date <= today) == true) {
+            return true;
+        }
     }
     return false;
 }
@@ -102,5 +111,7 @@ onEvent('click', button, () => {
     } else {
         userDate.innerText = `Please, enter a valid date`;
         userAge.innerText = `Example: 23-12-2001`;
+        userDays.innerText = ``;
+        daysToBirthday.innerText = ``;
     }
 });
